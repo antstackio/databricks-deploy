@@ -1,11 +1,22 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Databricks Deploy'
+description: 'A Github action to deploy in Databricks repos'
+author: 'sleepy0owl/antstack'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  databricks-host:
+    description: >
+      Hostname of the Databricks workspace in which to deploy the latest code. If unspecified, the hostname
+      will be inferred from the DATABRICKS_HOST environment variable. Either this parameter or the
+      DATABRICKS_HOST environment variable must be set.
+    require: false
+  databricks-repo-id:
+    description: >
+      Repo Id of the Databricks repo. If unspecified, the repo-id will be inferred from the DATABRICKS_REPO_ID environment variable. 
+      Either this parameter or the DATABRICKS_REPO_ID environment variable must be set.
+    require: false
+  databricks-repo-branch:
+    description: >
+      The branch of the Databricks repo-id mentioned above. This action will update the mentioned branch.
+    require: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

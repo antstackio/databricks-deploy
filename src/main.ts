@@ -4,6 +4,7 @@ import axios from 'axios'
 
 async function run(): Promise<void> {
     try {
+        core.setOutput('Message', 'Starting Action')
         const databricks_host: string = utils.get_databricks_host()
         const databricks_repo_id: string = utils.get_databricks_repo_id()
         const databricks_branch: string = utils.get_repo_branch()
@@ -17,9 +18,9 @@ async function run(): Promise<void> {
                 Authorization: `Bearer ${token}`
             }
         }
-        core.debug(databricks_host)
-        core.debug(databricks_repo_id)
         const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`
+        core.setOutput('Message', dbc_endpoint)
+        core.setOutput('Message', 'Sending Request')
         const response = await axios.patch(
             dbc_endpoint,
             {

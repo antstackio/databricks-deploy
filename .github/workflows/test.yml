@@ -5,6 +5,9 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+env:
+  DATABRICKS_HOST: 'https://dbc-89c9e463-7ff5.cloud.databricks.com'
+  DATABRICKS_REPO_ID: '3704530822795613'
 
 jobs:
   build: # make sure build/ci work properly

@@ -1,13 +1,14 @@
 import * as core from '@actions/core'
-import * as utils from './utils'
 import axios from 'axios'
 
 async function run(): Promise<void> {
     try {
         core.debug('Starting Action')
-        const databricks_host: string = utils.get_databricks_host()
-        const databricks_repo_id: string = utils.get_databricks_repo_id()
-        const databricks_branch: string = utils.get_repo_branch()
+        const databricks_host: string = core.getInput('databricks-host')
+        const databricks_repo_id: string = core.getInput('databricks-repo-id')
+        const databricks_branch: string = core.getInput(
+            'databricks-repo-branch'
+        )
         const token = core.getInput('databricks-token')
 
         if (!token) {

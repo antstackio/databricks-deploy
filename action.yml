@@ -17,6 +17,8 @@ inputs:
     description: >
       The branch of the Databricks repo-id mentioned above. This action will update the mentioned branch.
     require: true
+  databricks-token:
+    require: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -3,11 +3,11 @@ import * as core from '@actions/core'
 export function get_databricks_host(): string {
     const databricks_host_input: string = core.getInput('databricks-host')
     const databricks_host_env: string = process.env['DATABRICKS_HOST'] || ''
-    core.info(`DATABRICKS HOST INPUT :: ${databricks_host_input}`)
-    core.info(`DATABRICKS HOST ENV :: ${databricks_host_env}`)
+    core.debug(`DATABRICKS HOST INPUT :: ${databricks_host_input}`)
+    core.debug(`DATABRICKS HOST ENV :: ${databricks_host_env}`)
 
     if (!databricks_host_input && !databricks_host_env) {
-        core.error(
+        core.debug(
             'databricks-host or DATABRICKS_HOST environment variable must be set.'
         )
         throw new Error(

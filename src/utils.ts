@@ -7,6 +7,9 @@ export function get_databricks_host(): string {
     core.info(`DATABRICKS HOST ENV :: ${databricks_host_env}`)
 
     if (!databricks_host_input && !databricks_host_env) {
+        core.error(
+            'databricks-host or DATABRICKS_HOST environment variable must be set.'
+        )
         throw new Error(
             'databricks-host or DATABRICKS_HOST environment variable must be set.'
         )

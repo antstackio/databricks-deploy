@@ -43,23 +43,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-const utils = __importStar(__nccwpck_require__(918));
 const axios_1 = __importDefault(__nccwpck_require__(8757));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const databricks_host = utils.get_databricks_host();
-            const databricks_repo_id = utils.get_databricks_repo_id();
-            const databricks_branch = utils.get_repo_branch();
+            core.debug('Starting Action');
+            const databricks_host = core.getInput('databricks-host');
+            const databricks_repo_id = core.getInput('databricks-repo-id');
+            const databricks_branch = core.getInput('databricks-repo-branch');
+            const token = core.getInput('databricks-token');
+            if (!token) {
+                throw new Error('Authorization token is not set');
+            }
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
             const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`;
+            core.debug(dbc_endpoint);
+            core.debug('Sending Request');
             const response = yield axios_1.default.patch(dbc_endpoint, {
                 branch: databricks_branch
-            });
+            }, config);
             const status = response.status;
-            core.setOutput('Message', `HTTP status code ${status}`);
-            core.setOutput('Message', response.data);
+            core.debug(`HTTP status code ${status}`);
+            core.debug(response.data);
             if (status === 200) {
-                core.setOutput('Message', 'Deployed the code successfully');
+                core.debug('Deployed the code successfully');
             }
             else {
                 core.setFailed('Failed to update the repo');
@@ -72,77 +83,6 @@ function run() {
     });
 }
 run();
-
-
-/***/ }),
-
-/***/ 918:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.get_repo_branch = exports.get_databricks_repo_id = exports.get_databricks_host = void 0;
-const core = __importStar(__nccwpck_require__(2186));
-function get_databricks_host() {
-    const databricks_host_input = core.getInput('databricks-host');
-    const databricks_host_env = process.env['DATABRICKS_HOST'] || '';
-    if (!databricks_host_input && !databricks_host_env) {
-        throw new Error('databricks-host or DATABRICKS_HOST environment variable must be set.');
-    }
-    else {
-        return databricks_host_input
-            ? databricks_host_input
-            : databricks_host_env;
-    }
-}
-exports.get_databricks_host = get_databricks_host;
-function get_databricks_repo_id() {
-    const databricks_repo_input = core.getInput('databricks-repo-id');
-    const databricks_repo_env = process.env['DATABRICKS_REPO_ID'] || '';
-    if (!databricks_repo_input && !databricks_repo_env) {
-        throw new Error('databricks-repo-id or DATABRICKS_REPO_ID environment variable must be set.');
-    }
-    else {
-        return databricks_repo_input
-            ? databricks_repo_input
-            : databricks_repo_env;
-    }
-}
-exports.get_databricks_repo_id = get_databricks_repo_id;
-function get_repo_branch() {
-    const databricks_branch = core.getInput('databricks-repo-branch');
-    if (!databricks_branch) {
-        throw Error('databricks-repo-branch must be set.');
-    }
-    else {
-        return databricks_branch;
-    }
-}
-exports.get_repo_branch = get_repo_branch;
 
 
 /***/ }),

@@ -7,10 +7,25 @@ async function run(): Promise<void> {
         const databricks_host: string = utils.get_databricks_host()
         const databricks_repo_id: string = utils.get_databricks_repo_id()
         const databricks_branch: string = utils.get_repo_branch()
+        const token = process.env['DATABRICKS_TOKEN']
+
+        if (!token) {
+            throw new Error('Authorization token is not set')
+        }
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
         const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`
-        const response = await axios.patch(dbc_endpoint, {
-            branch: databricks_branch
-        })
+        const response = await axios.patch(
+            dbc_endpoint,
+            {
+                branch: databricks_branch
+            },
+            config
+        )
+
         const status = response.status
         core.setOutput('Message', `HTTP status code ${status}`)
         core.setOutput('Message', response.data)

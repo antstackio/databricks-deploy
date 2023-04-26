@@ -4,7 +4,7 @@ import axios from 'axios'
 
 async function run(): Promise<void> {
     try {
-        core.setOutput('Message', 'Starting Action')
+        core.info('Starting Action')
         const databricks_host: string = utils.get_databricks_host()
         const databricks_repo_id: string = utils.get_databricks_repo_id()
         const databricks_branch: string = utils.get_repo_branch()
@@ -19,8 +19,8 @@ async function run(): Promise<void> {
             }
         }
         const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`
-        core.setOutput('Message', dbc_endpoint)
-        core.setOutput('Message', 'Sending Request')
+        core.info(dbc_endpoint)
+        core.info('Sending Request')
         const response = await axios.patch(
             dbc_endpoint,
             {
@@ -30,10 +30,10 @@ async function run(): Promise<void> {
         )
 
         const status = response.status
-        core.setOutput('Message', `HTTP status code ${status}`)
-        core.setOutput('Message', response.data)
+        core.info(`HTTP status code ${status}`)
+        core.info(response.data)
         if (status === 200) {
-            core.setOutput('Message', 'Deployed the code successfully')
+            core.info('Deployed the code successfully')
         } else {
             core.setFailed('Failed to update the repo')
         }

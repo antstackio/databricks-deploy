@@ -25,3 +25,4 @@ jobs:
       - uses: ./
         with:
           databricks-repo-branch: 'main'
+          databricks-token: ${{ secrets.DATABRICKS_TOKEN }}

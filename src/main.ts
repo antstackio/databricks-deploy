@@ -8,7 +8,7 @@ async function run(): Promise<void> {
         const databricks_host: string = utils.get_databricks_host()
         const databricks_repo_id: string = utils.get_databricks_repo_id()
         const databricks_branch: string = utils.get_repo_branch()
-        const token = process.env['DATABRICKS_TOKEN']
+        const token = core.getInput('databricks-token')
 
         if (!token) {
             throw new Error('Authorization token is not set')

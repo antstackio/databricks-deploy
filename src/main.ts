@@ -17,6 +17,8 @@ async function run(): Promise<void> {
                 Authorization: `Bearer ${token}`
             }
         }
+        core.debug(databricks_host)
+        core.debug(databricks_repo_id)
         const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`
         const response = await axios.patch(
             dbc_endpoint,

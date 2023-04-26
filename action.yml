@@ -1,6 +1,6 @@
 name: 'Databricks Deploy'
 description: 'A Github action to deploy in Databricks repos'
-author: 'sleepy0owl/antstack'
+author: 'sleepy0owl'
 inputs:
   databricks-host:
     description: >

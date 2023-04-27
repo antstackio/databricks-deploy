@@ -2,6 +2,7 @@
   <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
 </p>
 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=antstackio_databricks-deploy&metric=bugs&token=0ca5f6aa6e0b2b05baa97c48bdd45b9ad94b5062)](https://sonarcloud.io/summary/new_code?id=antstackio_databricks-deploy)
 # Create a JavaScript Action using TypeScript
 
 Use this template to bootstrap the creation of a TypeScript action.:rocket:

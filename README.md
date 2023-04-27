@@ -5,9 +5,12 @@
   </p>
 
   <p align="center">
-    <a href="https://github.com/antstackio/databricks-deploy/actions"><img alt="typescript-action status" src="https://github.com/antstackio/databricks-deploy/workflows/build-test/badge.svg"></a>
+    <a href="https://github.com/antstackio/databricks-deploy/actions"><img alt="build-test status" src="https://github.com/antstackio/databricks-deploy/workflows/build-test/badge.svg"></a>
+    <a ><img alt="sonar-cloud-quality-gate" src="https://sonarcloud.io/api/project_badges/measure?project=antstackio_databricks-deploy&metric=alert_status&token=0ca5f6aa6e0b2b05baa97c48bdd45b9ad94b5062"></a>
+    <a ><img alt="sonar-cloud-bugs" src="https://sonarcloud.io/api/project_badges/measure?project=antstackio_databricks-deploy&metric=bugs&token=0ca5f6aa6e0b2b05baa97c48bdd45b9ad94b5062"></a>
   </p>
 </p>
+
 # Create a JavaScript Action using TypeScript
 
 Use this template to bootstrap the creation of a TypeScript action.:rocket:

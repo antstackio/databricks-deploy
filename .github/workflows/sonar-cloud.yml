@@ -7,8 +7,9 @@ on:
 jobs:
     sonarcloud:
         name: SonarCloud
-        runs-on: ubuntu
+        runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3.5.2
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
               env:

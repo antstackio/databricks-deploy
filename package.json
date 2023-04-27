@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sleepy0owl/databricks-deploy.git"
+    "url": "git+https://github.com/antstackio/databricks-deploy.git"
   },
   "keywords": [
     "actions",

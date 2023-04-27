@@ -43,3 +43,13 @@ export function get_repo_branch(): string {
         return databricks_branch
     }
 }
+
+export function get_databricks_token(): string {
+    const databricks_token: string = core.getInput('databricks-token')
+
+    if (!databricks_token) {
+        throw Error('Databricks token must be set.')
+    } else {
+        return databricks_token
+    }
+}

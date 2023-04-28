@@ -32,4 +32,8 @@ see [action.yml](action.yml)
 ## License
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
 
-**If you face any problem while using the action just create an issue**
+## Code of Conduct
+:wave: See our [Code of Conduct](CODE_OF_CONDUCT)
+
+
+**PS. If you face any problem while using the action just create an issue.**

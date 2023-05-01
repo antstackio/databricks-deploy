@@ -14,10 +14,8 @@ async function run(): Promise<void> {
                 Authorization: `Bearer ${token}`
             }
         }
-        core.info('Starting to deploy')
+        core.info('Starting to deploy......')
         const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`
-        core.debug(dbc_endpoint)
-        core.debug('Sending Request')
         const response = await axios.patch(
             dbc_endpoint,
             {
@@ -27,8 +25,6 @@ async function run(): Promise<void> {
         )
 
         const status = response.status
-        core.debug(`HTTP status code ${status}`)
-        core.debug(response.data)
         if (status === 200) {
             core.info('Deployed the code successfully')
         } else {

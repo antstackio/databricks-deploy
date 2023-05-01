@@ -57,16 +57,12 @@ function run() {
                     Authorization: `Bearer ${token}`
                 }
             };
-            core.info('Starting to deploy');
+            core.info('Starting to deploy......');
             const dbc_endpoint = `${databricks_host}/api/2.0/repos/${databricks_repo_id}`;
-            core.debug(dbc_endpoint);
-            core.debug('Sending Request');
             const response = yield axios_1.default.patch(dbc_endpoint, {
                 branch: databricks_branch
             }, config);
             const status = response.status;
-            core.debug(`HTTP status code ${status}`);
-            core.debug(response.data);
             if (status === 200) {
                 core.info('Deployed the code successfully');
             }
@@ -119,10 +115,7 @@ const core = __importStar(__nccwpck_require__(2186));
 function get_databricks_host() {
     const databricks_host_input = core.getInput('databricks-host');
     const databricks_host_env = process.env['DATABRICKS_HOST'] || '';
-    core.debug(`DATABRICKS HOST INPUT :: ${databricks_host_input}`);
-    core.debug(`DATABRICKS HOST ENV :: ${databricks_host_env}`);
     if (!databricks_host_input && !databricks_host_env) {
-        core.debug('databricks-host or DATABRICKS_HOST environment variable must be set.');
         throw new Error('databricks-host or DATABRICKS_HOST environment variable must be set.');
     }
     else {

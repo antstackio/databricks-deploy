@@ -19,7 +19,7 @@ see [action.yml](action.yml)
 
 <!-- start usage -->
 ```yaml
-- uses: antstackio/databricks-deploy@v1.0.2
+- uses: antstackio/databricks-deploy@v1.0.3
   with:
     databricks-repo-branch: 'your branch name'
     databricks-token: 'databricks token from github secret'

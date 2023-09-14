@@ -25,10 +25,10 @@ async function run(): Promise<void> {
         )
 
         const status = response.status
+        core.info(`status code ${status}`)
         if (status === 200) {
             core.info('Deployed the code successfully')
-        }
-        if (status === 401) {
+        } else if (status === 401) {
             core.info(
                 'Authentication error, please check your databricks token!'
             )

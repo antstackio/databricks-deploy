@@ -24,4 +24,4 @@ jobs:
           databricks-repo-branch: 'main'
           databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
           databricks-host: 'https://dbc-89c9e463-7ff5.cloud.databricks.com'
-          databricks-repo-id: '3704530822795613'
+          databricks-repo-id: '2811515952360794'

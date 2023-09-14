@@ -66,13 +66,18 @@ function run() {
             if (status === 200) {
                 core.info('Deployed the code successfully');
             }
+            if (status === 401) {
+                core.info('Authentication error, please check your databricks token!');
+            }
             else {
                 core.setFailed('Failed to update the repo');
             }
         }
         catch (error) {
-            if (error instanceof Error)
+            if (error instanceof Error) {
+                core.info(error.message);
                 core.setFailed(error.message);
+            }
         }
     });
 }

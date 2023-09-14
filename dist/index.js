@@ -63,16 +63,22 @@ function run() {
                 branch: databricks_branch
             }, config);
             const status = response.status;
+            core.info(`status code ${status}`);
             if (status === 200) {
                 core.info('Deployed the code successfully');
+            }
+            else if (status === 401) {
+                core.info('Authentication error, please check your databricks token!');
             }
             else {
                 core.setFailed('Failed to update the repo');
             }
         }
         catch (error) {
-            if (error instanceof Error)
+            if (error instanceof Error) {
+                core.info(error.message);
                 core.setFailed(error.message);
+            }
         }
     });
 }
@@ -113,15 +119,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.get_databricks_token = exports.get_repo_branch = exports.get_databricks_repo_id = exports.get_databricks_host = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 function get_databricks_host() {
+    var _a;
     const databricks_host_input = core.getInput('databricks-host');
-    const databricks_host_env = process.env['DATABRICKS_HOST'] || '';
+    const databricks_host_env = (_a = process.env['DATABRICKS_HOST']) !== null && _a !== void 0 ? _a : '';
     if (!databricks_host_input && !databricks_host_env) {
         throw new Error('databricks-host or DATABRICKS_HOST environment variable must be set.');
     }
     else {
-        return databricks_host_input
-            ? databricks_host_input
-            : databricks_host_env;
+        return databricks_host_input || databricks_host_env;
     }
 }
 exports.get_databricks_host = get_databricks_host;
@@ -132,9 +137,7 @@ function get_databricks_repo_id() {
         throw new Error('databricks-repo-id or DATABRICKS_REPO_ID environment variable must be set.');
     }
     else {
-        return databricks_repo_input
-            ? databricks_repo_input
-            : databricks_repo_env;
+        return databricks_repo_input || databricks_repo_env;
     }
 }
 exports.get_databricks_repo_id = get_databricks_repo_id;
